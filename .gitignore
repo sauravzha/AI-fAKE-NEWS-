@@ -1,0 +1,25 @@
+# Systems
+.DS_Store
+Thumbs.db
+
+# NodeJS
+node_modules/
+.next/
+dist/
+build/
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+.env
+site-packages/
+
+# Project Specific
+.gemini/
+static/uploads/
