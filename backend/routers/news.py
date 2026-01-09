@@ -1,10 +1,5 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-import sys
-import os
-
-# Add ml_engine to path to import detector
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from ml_engine.fake_news_model.detector import FakeNewsDetector
 
 router = APIRouter(
