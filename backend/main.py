@@ -18,8 +18,12 @@ os.makedirs(STATIC_DIR, exist_ok=True)
 # CORS (PUBLIC)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=[
+        "https://ai-fake-news-nrt5.vercel.app",
+        "https://ai-fake-news-ygr0.onrender.com",
+        "http://localhost:3000", # Added for local testing
+    ],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
