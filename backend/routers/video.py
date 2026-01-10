@@ -1,12 +1,7 @@
-from fastapi import APIRouter, File, UploadFile, HTTPException
-import shutil
+from fastapi import APIRouter, File, UploadFile
 import os
-import sys
+import shutil
 import uuid
-
-# Add ml_engine path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-
 
 router = APIRouter(
     prefix="/analyze",
