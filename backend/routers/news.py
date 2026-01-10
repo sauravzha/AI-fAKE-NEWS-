@@ -1,6 +1,11 @@
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-from ml_engine.fake_news_model.detector import FakeNewsDetector
+
+try:
+    from ml_engine.fake_news_model.detector import FakeNewsDetector
+    print("Initializing Fake News Model...")
+    news_detector = FakeNewsDetector()
+except Exception as e:
+    print(f"Failed to load model (likely memory/dependency issue): {e}")
+    news_detector = None
 
 router = APIRouter(
     prefix="/analyze",
@@ -10,18 +15,15 @@ router = APIRouter(
 class TextRequest(BaseModel):
     text: str
 
-# Global instance to load model once on startup (lazy loading can also be done)
-print("Initializing Fake News Model...")
-try:
-    news_detector = FakeNewsDetector()
-except Exception as e:
-    print(f"Failed to load model: {e}")
-    news_detector = None
-
 @router.post("/text")
 async def analyze_text(request: TextRequest):
-    if not news_detector:
-        raise HTTPException(status_code=503, detail="Model not loaded")
+    if news_detector is None:
+        return {
+            "verdict": "unavailable", 
+            "confidence": 0.0,
+            "message": "Model disabled due to deployment memory limits (Demo Mode)"
+        }
     
     result = news_detector.analyze(request.text)
     return result
+

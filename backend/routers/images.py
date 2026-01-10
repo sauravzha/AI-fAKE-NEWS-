@@ -7,7 +7,6 @@ import uuid
 
 # Add ml_engine path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-from ml_engine.fake_image_model.detector import FakeImageDetector
 
 router = APIRouter(
     prefix="/analyze",
@@ -23,10 +22,12 @@ os.makedirs(ELA_DIR, exist_ok=True)
 # Initialize Detector
 print("Initializing Fake Image Detector...")
 try:
+    from ml_engine.fake_image_model.detector import FakeImageDetector
     image_detector = FakeImageDetector()
 except Exception as e:
-    print(f"Failed to load Image Model: {e}")
+    print(f"Failed to load Image Model (likely memory/dependency issue): {e}")
     image_detector = None
+
 
 @router.post("/image")
 async def analyze_image(file: UploadFile = File(...)):

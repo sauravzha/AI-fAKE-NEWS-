@@ -6,7 +6,6 @@ import uuid
 
 # Add ml_engine path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-from ml_engine.deepfake_video_model.detector import DeepfakeVideoDetector
 
 router = APIRouter(
     prefix="/analyze",
@@ -20,10 +19,12 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 # Initialize Detector
 print("Initializing Video Detector...")
 try:
+    from ml_engine.deepfake_video_model.detector import DeepfakeVideoDetector
     video_detector = DeepfakeVideoDetector()
 except Exception as e:
-    print(f"Failed to load Video Detector: {e}")
+    print(f"Failed to load Video Detector (likely memory/dependency issue): {e}")
     video_detector = None
+
 
 @router.post("/video")
 async def analyze_video(file: UploadFile = File(...)):
