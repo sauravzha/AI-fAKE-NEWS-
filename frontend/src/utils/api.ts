@@ -10,14 +10,14 @@ export const api = axios.create({
 });
 
 export const analyzeText = async (text: string) => {
-    const response = await api.post('/analyze/text', { text });
+    const response = await api.post('/news/analyze', { text });
     return response.data;
 };
 
 export const analyzeImage = async (file: File) => {
     const formData = new FormData();
     formData.append('file', file);
-    const response = await api.post('/analyze/image', formData, {
+    const response = await api.post('/images/analyze', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data;
@@ -26,7 +26,7 @@ export const analyzeImage = async (file: File) => {
 export const analyzeVideo = async (file: File) => {
     const formData = new FormData();
     formData.append('file', file);
-    const response = await api.post('/analyze/video', formData, {
+    const response = await api.post('/video/analyze', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data;

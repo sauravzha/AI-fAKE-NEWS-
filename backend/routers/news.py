@@ -2,14 +2,14 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 router = APIRouter(
-    prefix="/analyze",
+    prefix="/news",
     tags=["analysis"]
 )
 
 class TextRequest(BaseModel):
     text: str
 
-@router.post("/text")
+@router.post("/analyze")
 async def analyze_text(request: TextRequest):
     return {
         "verdict": "demo", 

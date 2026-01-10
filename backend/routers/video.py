@@ -4,7 +4,7 @@ import shutil
 import uuid
 
 router = APIRouter(
-    prefix="/analyze",
+    prefix="/video",
     tags=["analysis"]
 )
 
@@ -12,7 +12,7 @@ router = APIRouter(
 UPLOAD_DIR = "static/uploads/videos"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-@router.post("/video")
+@router.post("/analyze")
 async def analyze_video(file: UploadFile = File(...)):
     # Generate unique filename to simulate saving for demo
     file_extension = file.filename.split(".")[-1]

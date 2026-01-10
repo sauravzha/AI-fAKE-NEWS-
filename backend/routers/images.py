@@ -5,7 +5,7 @@ import shutil
 import uuid
 
 router = APIRouter(
-    prefix="/analyze",
+    prefix="/images",
     tags=["analysis"]
 )
 
@@ -15,7 +15,7 @@ ELA_DIR = "static/ela"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(ELA_DIR, exist_ok=True)
 
-@router.post("/image")
+@router.post("/analyze")
 async def analyze_image(file: UploadFile = File(...)):
     # Generate unique filename
     file_extension = file.filename.split(".")[-1]
